@@ -409,8 +409,15 @@
     27/04/2022:<br>
     <a href="https://rmiteduau.sharepoint.com/:v:/r/sites/FRIAssignment2Group3/Shared%20Documents/General/Recordings/Wednesday%20Meetings%20FIXED-FIXED_20220427_070922.mp4?csf=1&web=1&e=CIUj0R">
       https://rmiteduau.sharepoint.com/:v:/r/sites/FRIAssignment2Group3/Shared%20Documents/General/Recordings/Wednesday%20Meetings%20FIXED-FIXED_20220427_070922.mp4?csf=1&web=1&e=CIUj0R</a>
-      <br>
-      One member absent
+      <br>1 absent
+      <br><br>
+
+      30/04/2022:<br>
+      <a href="https://rmiteduau-my.sharepoint.com/:v:/r/personal/s3931227_student_rmit_edu_au/Documents/Recordings/Saturday%20Catch%20Up%20Meeting_20220430_071020.mp4?csf=1&web=1&e=6Nu5cY">
+        https://rmiteduau-my.sharepoint.com/:v:/r/personal/s3931227_student_rmit_edu_au/Documents/Recordings/Saturday%20Catch%20Up%20Meeting_20220430_071020.mp4?csf=1&web=1&e=6Nu5cY </a>
+        <br>4 absent
+
+
   </p>
 
   <hr>
@@ -788,26 +795,126 @@
               <h3>Description</h3>
 
               <p>
-                The main features of the app will include:<br><br>
+                For the very first version of this app, we plan to include just a few features as a proof of concept to show what both the app and us as a group are capable of.
+                What features will be included in the prototype is still to be decided, and will be agreed upon in the near future.
+                The following is a list of the basic features that we wish to include, and how the app overall will function.<br><br>
+              </p>
+
+              <p>
 
                 <b>Display a list of beaches by search criteria/filter descending or ascending:</b><br><br>
-                Text here
+                Upon loading into the app, this will be the first thing the user sees.
+                By default, it will simply display a vertical list of beaches sorted by nearest distance first.
+                Each listing will have a basic picture, name of beach and the overall user rating. The user will also be able to view the beaches in a maps view,
+                with each listed beach location having an marker over it.
+                The user will have a variety of search filters to find what they are looking for easily which can be sorted by ascending or descending, that will include:
+</p>
 
-                <br><br><br>
-                <b>Layout:</b>
+                <ul>
+                  <li>Location (eg: city or suburb)</li>
+                  <li>Nearest distance</li>
+                  <li>Alphabetical order</li>
+                  <li>By the currently least or busiest beaches</li>
+                  <li>User ratings for: water quality, pollution, scenery, overall/average</li>
+                  <li>Lifeguard available</li>
+                  <li>Dog friendly</li>
+                </ul>
 
 
-                <br><br><br>
-                <b>Show relevant information about the selected beach:</b>
+                <p>
+
+                <br>
+                We plan to implement this feature by using the Google Maps API (Google Maps Platform) to fetch the geo location data/the actual beaches themselves.
+                As a result, this means the beaches that it will fetch will be entirely dependent on Google Maps, as if it is not listed on there then it won’t show up on our app.
+                It would be possible to manually send out updates to add new beaches that aren’t listed on Google Maps, but for simplicity sakes we will not worry about that for now.
+                <br><br>
+
+                In order to avoid reliance on having a stable internet connection, all the beaches that were previously searched for (that is, the ones that the user have scrolled past)
+                will be cached locally. This means in the event of having no internet connection, the user will still be able search something up.
+                Although since this is being stored on the users phone then we need to consider storage space. We will probably cap the amount of data that can be cached at around 500MB by default,
+                though this will be able to be configured by the user.
+
+                </p>
 
 
-                <br><br><br>
-                <b>Maintaining security:</b>
+                <p>
+                <br><br>
+                <b>Show relevant information about the selected beach:</b><br><br>
+                Once the user has selected a beach, the listing page for that beach will show up providing a variety of information.
+                The information that the user will be able to view is similar to the things they could filter by. These are:
+                </p>
+                <ul>
+                  <li>Image – a image of the beach fetched from Google to show the user what it looks like</li>
+                  <li>Location – what suburb and city is it located in?</li>
+                  <li>Distance – how far away is the beach?</li>
+                  <li>*Peak hours – what are the most and least busiest hours for it (display in a bar chart possibly)</li>
+                  <li>*User ratings for: pollution, water quality, scenery, user rating out of five, written user rating, an overall average rating for each of these things</li>
+                  <li>*Lifeguard available – show if the beach has assigned lifeguards, if so when are they present? </li>
+                  <li>*Dogs friendly – say if dogs are allowed at the beach and how good they are for dogsy</li>
+                </ul>
 
 
-                <br><br><br>
-                <b>Family Friendly Reviews:</b>
+                <p>
+              <br>
+              By default, what details can be fetched from Google will be displayed, although the main method of the characteristics marked with an asterisk being determined will by the users
+              themselves. The user will be able to leave both a numerical review and a written review for these aspects,
+              which the app will then generate some sort of average or total from the numerical review depending on the specific characteristic
+              (meaning the written aspect will be optional).
+              We plan for users to be able to upload images as part of their review as such a feature could help them convey a point or as further proof of their review.
+              Since this is a very user driven app, a report feature must be included which is discussed more later on.
 
+
+
+                </p>
+
+
+<p>
+                <br><br>
+                <b>Maintaining security:</b><br><br>
+                At the current stage, we’re going to require users to make an account in order to leave reviews.
+                This may end up being a barrier and reduce the simplicity of fully utilizing the app, but we need a way to moderate user content.
+                This means setting up a way for people to create accounts and storing the details on a server. This server will be setup on our end,
+                and it will contain information pertaining to accounts and the reviews/user content. This means creating a database that the app will retrieve data from.
+                We don’t exactly plan on reinventing the wheel, so we will simply opt for using mySQL with phpMyAdmin/MariaDB.
+                This will run on a Raspberry Pi using Ubuntu until hardware needs increase.
+                <br><br>
+                Since account creation will be a thing, we must consider database and server security.
+                Account passwords must be encrypted before they are stored into the database,
+                as storing this sort of thing in plaintext is obviously a terrible idea.
+                Since this will be an Android app, we will be able to use Java with something like BCrypt to encrypt the passwords –
+                although if we wish to expand to iOS then Java may not be the ideal choice.
+</p>
+
+                <br><br>
+                <p>
+                <b>Family Friendly Reviews:</b><br>
+                Following on from prior features, we will need a system to ensure written reviews and uploaded images are “family friendly”,
+                as in they do not contain anything inappropriate. The main things that would be deemed inappropriate include:
+                </p>
+
+                <ul>
+                  <li>Swearing</li>
+                  <li>Abuse, including slurs and threats of violence</li>
+                  <li>Spam, phishing links and advertisements</li>
+                  <li>Sexual content</li>
+                  <li>Spreading personal information about someone</li>
+                </ul>
+                <p>
+                  There are two main ways we could go about automatically enforcing this.
+                  The first is to have a list or “dictionary” of banned words, so a user would not be able to post a review containing these words – being asked to alter the content.
+                  The second would be manual review by moderators, who take sufficient action which can range from removing the review or banning the user.
+                  For this to work, we would need to include a report feature which would send a “ticket” to the moderators containing the post and report reason.
+                  The report reason would simply be a dropdown menu of pre-determined options.
+                </p>
+
+                <br><br>
+
+
+                <p>
+                <b>Layout:</b> <br>
+                While layout is not a feature like the others, it is still something very important to consider and will determine how many people will be attracted.
+                The kind of people who would be interested in going to a beach is very broad, of nearly any age or general demographic.
+                This means the layout needs to be very intuitive and accessible to everyone. It cannot contain “information overload” and only have the essentials present at once.
               </p>
 
               <h3>Tools & Technology</h3>
@@ -828,7 +935,7 @@
               <h3>Outcome</h3>
               <p>
                 The outcome of this application is designing a beach app which will be designed using mapping to create a rating system which the user can rate
-                the beach they are at after locating the beach through the app using either a search bar or by using the application to locate the beach you are looking for.   
+                the beach they are at after locating the beach through the app using either a search bar or by using the application to locate the beach you are looking for.
               </p>
 
 
@@ -840,7 +947,7 @@
               </div>
               <h2>Group Reflection</h2>
 
-              <h3>Chris Turner</h3>
+              <u><h3>Chris Turner</h3></u>
 
               <h3>What went well?</h3>
               <p>
@@ -880,7 +987,7 @@
               </p>
 
 
-              <h3>Kowsar Rahman</h3>
+              <u><h3>Kowsar Rahman</h3></u>
 
               <h3>What went well?</h3>
 
@@ -899,21 +1006,118 @@
 
               <p>I have a considerable amount of experience in working with groups and have faced challenges and on some occasions overcame those too. Working in groups have taught me on how to invest faith on people. The emergence of covid changed how we meet resulting more meetings taking place on the virtual world. It is extremely impossible to micro-manage people on online although micro-managing is something is not done on real life as well. Hence, we trust on people to carry out their given tasks and when they do carry out, it is a moment of success as I discover that I can select the right people to do a particular work.  </p>
 
-              <h3>Connor O'Loughlin</h3>
+              <u><h3>Connor O'Loughlin</h3></u>
 
 
-              <h3>Mason Graham</h3>
 
 
-              <h3>Sean Shlemoon</h3>
+              <u><h3>Mason Graham</h3></u>
 
 
-              <h3>Nate Winter</h3>
 
+
+              <u><h3>Sean Shlemoon</h3></u>
+
+
+
+
+              <u><h3>Nate Winter</h3></u>
+
+
+              <h3>What went well?</h3>
+              <p>
+              Our group has been friendly and understanding and there haven’t been any major disagreements, complaints or altercations.
+              We have become good at communicating with each other and keeping others up to date on what we are up to despite us failing to do this earlier in the project.
+              </p>
+
+              <h3>What could be improved?</h3>
+              <p>
+              Our motivation and our effort towards the quality and quantity of content that we make for our group assignments could be improved.
+              Also, the efficiency and speed of us producing work can be worked on.
+              For me personally, organising myself better and properly allocating time towards my parts is what I can improve on to make sure I can complete my parts on time.
+              This is something I need to work on regardless but also something I need to work on in groups specifically in case someone depends on my parts being
+              completed in any future assignment of mine.
+            </p>
+
+
+
+              <h3>At least one thing that was surprising?</h3>
+
+              <p>
+                I think it was surprising how quickly we improved on our communication and participation in this assignment.
+                I was expecting it to be more awkward and take more time for us to get used to communicating properly with each other
+                however I think we got much better at it than I thought we would.
+              </p>
+
+
+              <h3>At least one thing that you have learned about groups?</h3>
+
+              <p>
+                Working in groups I think is very hard and I personally find it quite annoying as I learned that chemistry with teammates is an important factor in success.
+                Despite most of our parts not depending on other people's parts, I found that whenever we had a lack of communication it was difficult to judge where others were up to,
+                where we need to be and understand whether certain teammates were struggling or not. So, I learnt that team chemistry and constant,
+                clear communication are very important factors to success
+              </p>
+
+
+              <h3>Group Acitivty/Contribution</h3>
+              <p>I attended all teams meetings and all tutorials. I completed the IT Work section and the Tools and Technology section of the Project Idea</p>
 
 
               <h3>Overall Group Reflection</h3>
 
+
+
+              <p>
+                Upon discussion as a group, we all agree with each other's individual reflections of the group.<br><br>
+
+              </p>
+
+                <h3>What went well?</h3>
+
+                <p>
+                  While communication at the very beginning at the poor,
+                  this improved near instantly after the first week with nearly everyone checking the Microsoft Teams announcements near instantly.
+                  We’re glad that this was the case as if poor communication continued any longer than it did, then this assignment would have been even harder to complete.
+                  Going forward in this class, university and in our potential careers we can all agree that nailing down effective communication immediately will be of utmost importance
+                  <br><br>
+                  As soon as we met each other we were all able to get along, work together and raise any concerns or criticisms straight away.
+                  We’re all very glad this was the case in the end since the completion of this assignment was delayed,
+                  and if we didn’t really get along it would have been debatable if this would have been completed at all.
+                </p>
+
+
+                <h3>What could be improved?</h3>
+
+                <p>
+                  The work ethic and general motivation was seriously lacking until the weekend that the assignment was due,
+                  with only two members finishing their allocated tasks in a reasonable timeframe.
+                  This made our work suffer a lot leading to a lower standard/quality of writing due to needing to rush and take on another member’s task last minute.
+                  We have agreed to improve upon this aspect for assignment 3 where we implement our project, as that is going be a lot more work than this.
+                  We will most likely ensure that we will be able to show off steady progress every week to keep on track and be able to have enough time to refine a draft
+                  (in other words, time management). It is also important to get tasks finished on time as other members may rely on them.
+                </p>
+
+                <h3>At least one thing thatn was surprising?</h3>
+
+                <p>
+                  We were surprised at a few things; how important great communication is and how quickly that communication improved.
+                  Even if you have some very smart and skilled people working with you, even the best of skills can quickly fall apart with regularly communicating with others.
+                  We were also surprised truly how much you can get done in a group when a deadline is on your doorstep alongside with its consequences,
+                  although we can safely say this is not an ideal way of doing things and we would not want it to happen again
+                </p>
+
+
+                <h3>At least one thing that you have learned about groups?</h3>
+
+                  <p>
+                    Going off on what was surprising, we learnt that communication and organisation is key to success and if that aspect isn’t nailed and perfected straight away then
+                    it will make our lives immensely harder and lead to a worse result.
+                    Many of us at first assumed that we could still get by communication was “fine” and not amazing, which we soon realised was very wrong.
+                    Everyone needs to know where others are at, so we can plan accordingly and account for worse case scenarios.
+                  </p>
+
+              </p>
 
 
               <hr>
