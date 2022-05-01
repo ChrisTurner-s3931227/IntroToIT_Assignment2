@@ -8,8 +8,8 @@ p, ul {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
   margin: 20px;
-  margin-left: 50px;
-  margin-right: 50px;
+  margin-left: 300px;
+  margin-right: 300px;
 }
 
 
@@ -18,8 +18,8 @@ table {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
   margin: 20px;
-  margin-left: 50px;
-  margin-right: 50px;
+  margin-left: 300px;
+  margin-right: 300px;
 
   border: 1px solid #617073;
 }
@@ -28,15 +28,15 @@ h1,h2,h3 {
   color: #748589;
   font-family: Arial, Helvetica, sans-serif;
   margin: 20px;
-  margin-left: 50px;
-  margin-right: 50px;
+  margin-left: 300px;
+  margin-right: 300px;
 }
 
 hr {
   color: #7A93AC;
   margin: 20px;
-  margin-left: 50px;
-  margin-right: 50px;
+  margin-left: 300px;
+  margin-right: 300px;
 }
 
 img {
